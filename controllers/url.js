@@ -1,6 +1,7 @@
 const ShortUniqueId = require('short-unique-id');
 const URL = require('../models/url');
 
+
 async function handleGenerateShortURL(req, res) {
     const body = req.body;
     if (!body.url) {
@@ -8,16 +9,14 @@ async function handleGenerateShortURL(req, res) {
             error: 'Url is required'
         });
     }
-
     const shortID = new ShortUniqueId({ length: 8 }).randomUUID(); // Generate the short ID string
     await URL.create({
         shortId: shortID,
         redirectURL: body.url,
         visitHistory: [],
     });
-
-    return res.json({
-        id: shortID
+    return res.render("home", {
+        id: shortID,
     });
 }
 
@@ -57,8 +56,16 @@ async function handleRedirection(req, res) {
     }
 }
 
+async function handleGetUrlinViews(req,res){
+    const allurls = await URL.find({});
+    res.render("home", {
+        urls: allurls,
+    });
+}
+
 module.exports = {
     handleGenerateShortURL,
     handleGetAnalytics,
-    handleRedirection
+    handleRedirection,
+    handleGetUrlinViews
 }
