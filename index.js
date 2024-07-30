@@ -11,10 +11,10 @@ const userRoute = require('./routes/user');
 
 // Declaration of APP
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Passing URL of Database
-connectMongoDB("mongodb://127.0.0.1:27017/short-url")
+connectMongoDB(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@short-url.biynbga.mongodb.net/db-1/?retryWrites=true&w=majority&appName=short-url`)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
 
