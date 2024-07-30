@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require('dotenv').config()
 const { connectMongoDB } = require('./connect');
 const cookieParser = require('cookie-parser');
 const { checkForAuthentication, restrictTo } = require('./middlewares/auth');
