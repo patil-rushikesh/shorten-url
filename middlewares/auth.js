@@ -14,7 +14,7 @@ async function checkForAuthentication(req, res, next) {
 function restrictTo(roles) {
     return (req, res, next) => {
         if(!req.user){
-            return res.redirect('/login');
+            return res.redirect('/signup');
         }
         if(!roles.includes(req.user.role)){
             return res.end("unAuthorized");

@@ -72,7 +72,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -87,7 +88,14 @@
 
 <body>
     <div class="container">
-        <h1>Url Shortner</h1>
+        <h1>
+            Url Shortner 
+            <div>
+                <button>
+                    <a style="text-decoration: none; color: white;" href="/user/logout">Logout</a>
+                </button>
+            </div>
+        </h1>
 
         <div>
             <form method="post" action="/url">
@@ -98,33 +106,42 @@
         </div>
 
         <% if (locals.id) { %>
-            <p>URL GENERATED!: http://localhost:3000/url/<%= id %></p>
-        <% } %>
-
-        <div>
-            <% if (locals.urls) { %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sr.No.</th>
-                            <th>Short-Id</th>
-                            <th>Redirect</th>
-                            <th>Clicks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% urls.forEach((url, index) => { %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><%= url.shortId %></td>
-                                <td><%= url.redirectURL %></td>
-                                <td><%= url.visitHistory.length %></td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
+            <p>URL GENERATED!: http://localhost:3000/url/<%= id %>
+            </p>
             <% } %>
-        </div>
+
+                <div>
+                    <% if (locals.urls) { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Short-Id</th>
+                                    <th>Redirect</th>
+                                    <th>Clicks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% urls.forEach((url, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= index + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= url.shortId %>
+                                        </td>
+                                        <td>
+                                            <%= url.redirectURL %>
+                                        </td>
+                                        <td>
+                                            <%= url.visitHistory.length %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                        <% } %>
+                </div>
     </div>
 </body>
 
